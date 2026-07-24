@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { riskController } from '../controllers/risk.controller';
+import { riskMetricsController } from '../controllers/risk-metrics.controller';
 
 const router = Router();
 
@@ -20,5 +21,11 @@ router.put('/alert-config', (req, res) => riskController.updateAlertConfig(req, 
 router.get('/user/:address/risk-profile', (req, res) => riskController.getUserRiskProfile(req, res));
 
 router.get('/dashboard', (req, res) => riskController.getDashboard(req, res));
+
+router.get('/var', (req, res) => riskMetricsController.getVaR(req, res));
+
+router.get('/var/history', (req, res) => riskMetricsController.getVaRHistory(req, res));
+
+router.get('/stress-var', (req, res) => riskMetricsController.getStressVaR(req, res));
 
 export default router;
