@@ -39,8 +39,24 @@ members = [
   "contracts/referral-program",
   "contracts/token-adapter",
   "contracts/compliance",
+  "contracts/leveraged-yield",
+  "contracts/position-manager",
+  "contracts/principal-token",
+  "contracts/yield-token",
+  "contracts/yield-splitter",
+  "contracts/vault-share",
+  "contracts/auto-compound-vault",
+  "contracts/pool-interfaces",
+  "contracts/yield-router",
+  "contracts/dutch-auction",
+  "contracts/debt-token",
 ]
-exclude = ["fuzz", "formal-verification/safe-math-proofs"]
+exclude = [
+  "fuzz",
+  "formal-verification/safe-math-proofs",
+  "formal-verification/interest-rate-model-proofs",
+  "formal-verification/liquidation-math-proofs",
+]
 
 [workspace.lints.rust]
 

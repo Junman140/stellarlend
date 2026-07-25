@@ -21,6 +21,10 @@ import zkProofRoutes from './routes/zkProof.routes';
 import verificationRoutes from './routes/verification.routes';
 import configRoutes from './routes/config.routes';
 import analyticsRoutes from './routes/analytics.routes';
+import poolPerformanceRoutes from './routes/poolPerformance.routes';
+import migrationRoutes from './routes/migration.routes';
+import ratesRoutes from './routes/rates.routes';
+import crossProtocolRoutes from './routes/crossProtocol.routes';
 import developerRoutes from './routes/developer.routes';
 import mevRoutes from './routes/mev.routes';
 import reputationRoutes from './routes/reputation.routes';
@@ -29,16 +33,24 @@ import notificationRoutes from './routes/notification.routes';
 import disputeRoutes from './routes/dispute.routes';
 import creditRoutes from './routes/credit.routes';
 import nonceRoutes from './routes/nonce.routes';
+import riskEngineRoutes from './routes/riskEngine.routes';
+import yieldCurveRoutes from './routes/yieldCurve.routes';
+import rateForecastRoutes from './routes/rateForecast.routes';
+import liquidationDashboardRoutes from './routes/liquidationDashboard.routes';
+import opportunityExplorerRoutes from './routes/opportunityExplorer.routes';
+import { treasuryRoutes } from './routes/treasury.routes';
+import metricsRoutes from './routes/metrics.routes';
+import referralRoutes from './routes/referral.routes';
+import snsRoutes from './routes/sns.routes';
+import simulatorRoutes from './routes/simulator.routes';
+import emergencyRoutes from './routes/emergency.routes';
 
 import compression from 'compression';
 import { errorHandler } from './middleware/errorHandler';
 import { idempotencyMiddleware } from './middleware/idempotency';
 import { resetSensitiveRateLimits, sensitiveOperationRateLimiter } from './middleware/rate-limit';
 import { swaggerSpec, versionListHandler, v1Spec } from './config/swagger';
-import {
-  versionMiddleware,
-  legacyCompatibilityMiddleware,
-} from './middleware/versioning';
+import { versionMiddleware, legacyCompatibilityMiddleware } from './middleware/versioning';
 import logger from './utils/logger';
 import { requestIdMiddleware } from './middleware/requestId';
 import { requestLogger } from './middleware/requestLogger';
@@ -198,6 +210,10 @@ app.use('/api/zk', legacySecurityCompat, zkProofRoutes);
 app.use('/api/verification', legacySecurityCompat, verificationRoutes);
 app.use('/api/config', legacySystemCompat, configRoutes);
 app.use('/api/analytics', legacySystemCompat, analyticsRoutes);
+app.use('/api/pool-performance', legacySystemCompat, poolPerformanceRoutes);
+app.use('/api/migration', legacySystemCompat, migrationRoutes);
+app.use('/api/rates', legacySystemCompat, ratesRoutes);
+app.use('/api/cross-protocol', legacySystemCompat, crossProtocolRoutes);
 app.use('/api/mev', legacySecurityCompat, mevRoutes);
 app.use('/api/reputation', reputationRoutes);
 app.use('/api/social', socialRoutes);
@@ -205,6 +221,17 @@ app.use('/api/notifications', notificationRoutes);
 app.use('/api/disputes', disputeRoutes);
 app.use('/api/credit', creditRoutes);
 app.use('/api/nonce', nonceRoutes);
+app.use('/api/risk', riskEngineRoutes);
+app.use('/api/yield-curve', yieldCurveRoutes);
+app.use('/api/rates', rateForecastRoutes);
+app.use('/api/liquidations', liquidationDashboardRoutes);
+app.use('/api/liquidations', opportunityExplorerRoutes);
+app.use('/api/treasury', treasuryRoutes);
+app.use('/api/metrics', legacySystemCompat, metricsRoutes);
+app.use('/api/referral', referralRoutes);
+app.use('/api/sns', snsRoutes);
+app.use('/api/simulator', simulatorRoutes);
+app.use('/api/emergency', emergencyRoutes);
 
 app.use(errorHandler);
 
