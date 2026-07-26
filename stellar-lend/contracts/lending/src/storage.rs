@@ -1,4 +1,4 @@
-//! # Packed Pool Configuration Storage (issue #633)
+//! # Packed Pool Configuration Storage (issue #633, re-filed as #599)
 //!
 //! Each pool-configuration parameter previously occupied its own persistent
 //! slot, so a pool paid Soroban storage rent on five-plus separate entries.
@@ -82,7 +82,7 @@ pub struct PoolConfig {
     pub liquidation_incentive_bps: i128,
     pub last_update: u64,
     /// Packed status-flag byte (see `FLAG_*`).
-    pub flags: u8,
+    pub flags: u32,
 }
 
 /// The two packed words as persisted on-chain.
@@ -135,7 +135,7 @@ pub fn unpack(packed: &PackedConfig) -> PoolConfig {
         close_factor_bps: unpack_bps_field(packed.rate_word, 3),
         liquidation_incentive_bps: unpack_bps_field(packed.rate_word, 4),
         last_update: packed.status_word & TS_MASK,
-        flags: ((packed.status_word >> FLAGS_SHIFT) & FLAGS_MASK) as u8,
+        flags: ((packed.status_word >> FLAGS_SHIFT) & FLAGS_MASK) as u32,
     }
 }
 

@@ -37,12 +37,31 @@ members = [
   "contracts/liquidation-strategy",
   "contracts/sns-integration",
   "contracts/referral-program",
+  "contracts/insurance-marketplace",
   "contracts/token-adapter",
   "contracts/compliance",
-  "contracts/auction-types",
-  "contracts/liquidation-auction",
+  "contracts/leveraged-yield",
+  "contracts/position-manager",
+  "contracts/principal-token",
+  "contracts/yield-token",
+  "contracts/yield-splitter",
+  "contracts/vault-share",
+  "contracts/auto-compound-vault",
+  "contracts/pool-interfaces",
+  "contracts/yield-router",
+  "contracts/dutch-auction",
+  "contracts/debt-token",
+  "contracts/shared-math",
+  "contracts/shared-storage",
+  "tests/simulation/multi-user",
+  "tests/integration/flash-loan-liquidation",
 ]
-exclude = ["fuzz", "formal-verification/safe-math-proofs"]
+exclude = [
+  "fuzz",
+  "formal-verification/safe-math-proofs",
+  "formal-verification/interest-rate-model-proofs",
+  "formal-verification/liquidation-math-proofs",
+]
 
 [workspace.lints.rust]
 
