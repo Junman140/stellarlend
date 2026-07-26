@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { riskController } from '../controllers/risk.controller';
-import { riskSimulationController } from '../controllers/risk-simulation.controller';
+import { stressTestController } from '../controllers/stress-test.controller';
 
 const router = Router();
 
@@ -22,14 +22,24 @@ router.get('/user/:address/risk-profile', (req, res) => riskController.getUserRi
 
 router.get('/dashboard', (req, res) => riskController.getDashboard(req, res));
 
-router.post('/simulate', (req, res) => riskSimulationController.simulate(req, res));
+router.post('/stress/run', (req, res) => stressTestController.runStressTest(req, res));
 
-router.post('/simulate/batch', (req, res) => riskSimulationController.simulateBatch(req, res));
+router.post('/stress/run-all', (req, res) => stressTestController.runAllScenarios(req, res));
 
-router.get('/scenarios', (req, res) => riskSimulationController.getScenarios(req, res));
+router.get('/stress/category/:category', (req, res) => stressTestController.runByCategory(req, res));
 
-router.post('/correlation', (req, res) => riskSimulationController.getCorrelation(req, res));
+router.get('/stress/scenarios', (req, res) => stressTestController.getScenarios(req, res));
 
-router.post('/recommendations', (req, res) => riskSimulationController.getRecommendations(req, res));
+router.get('/stress/scenarios/:id', (req, res) => stressTestController.getScenario(req, res));
+
+router.post('/stress/scenarios/custom', (req, res) => stressTestController.createCustomScenario(req, res));
+
+router.post('/stress/scenarios/build', (req, res) => stressTestController.buildCustomScenario(req, res));
+
+router.delete('/stress/scenarios/:id', (req, res) => stressTestController.deleteScenario(req, res));
+
+router.get('/stress/scenarios/:id/export', (req, res) => stressTestController.exportScenario(req, res));
+
+router.post('/stress/scenarios/import', (req, res) => stressTestController.importScenario(req, res));
 
 export default router;
